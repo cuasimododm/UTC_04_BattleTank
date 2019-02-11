@@ -8,7 +8,6 @@
 
 // Forward declaration
 class UTankBarrel;
-class UTankTurret;
 class UTankAimingComponent;
 class UTankMovementComponent;
 class AProjectile;
@@ -21,12 +20,6 @@ class BATTLETAK_API ATank : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ATank();
-    
-    UFUNCTION(BlueprintCallable, Category = "Setup")
-    void SetBarrelReference(UTankBarrel* BarrelToSet);
-    
-    UFUNCTION(BlueprintCallable, Category = "Setup")
-    void SetTurretReference(UTankTurret* TurretToSet);
     
     void AimAt(FVector HitLocation);
     
@@ -41,13 +34,7 @@ protected:
     UTankMovementComponent* TankMovementComponent = nullptr;
     
 private:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-    
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-    UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
     TSubclassOf<AProjectile> ProjectileBlueprint;
     /* http://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/TSubclassOf/ */
     
@@ -58,7 +45,7 @@ private:
     float ReloadTimeInSeconds = 3;
     
     // To spawn the projectile
-    UTankBarrel* Barrel = nullptr;
+    UTankBarrel* Barrel = nullptr;  // TODO Remove
     
     double LastFireTime = 0;
 };

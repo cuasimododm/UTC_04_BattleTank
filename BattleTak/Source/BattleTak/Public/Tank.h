@@ -8,7 +8,6 @@
 
 // Forward declaration
 class UTankBarrel;
-class UTankAimingComponent;
 class AProjectile;
 
 UCLASS()
@@ -22,20 +21,15 @@ public:
     
     void BeginPlay() override;
     
-    void AimAt(FVector HitLocation);
-    
     UFUNCTION(BlueprintCallable, Category = "Firing")
     void Fire();
-    
-protected:
-    UPROPERTY(BlueprintReadOnly)
-    UTankAimingComponent* TankAimingComponent = nullptr;
     
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
     TSubclassOf<AProjectile> ProjectileBlueprint;
     /* http://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/TSubclassOf/ */
     
+    // TODO remove once firing is moved to aiming component
     UPROPERTY(EditDefaultsOnly, Category = "Firing")
     float LaunchSpeed = 4000;
     

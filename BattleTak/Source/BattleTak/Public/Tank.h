@@ -11,6 +11,20 @@ class BATTLETAK_API ATank : public APawn
 {
 	GENERATED_BODY()
 
-	// Sets default values for this pawn's properties
-	ATank();
+public:
+    // Called by the engine when current player is damage
+    virtual float TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser);
+    
+    UFUNCTION(BlueprintPure, Category="Health")
+    float GetHealthPercent() const;
+
+private:
+    // Sets default values for this pawn's properties
+    ATank();
+    
+    UPROPERTY(EditDefaultsOnly, Category="Setup")
+    int32 StartingHealth = 100;
+    
+    UPROPERTY(VisibleAnywhere, Category="Health")
+    int32 CurrentHealth = StartingHealth;
 };
